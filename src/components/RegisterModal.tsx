@@ -47,7 +47,7 @@ const dummyDataCurrency = [
     {label: 'Yuan', value: "yuan"},
 ]
 
-const RegisterModal = ({ isOpen, setIsOpen }) => {
+const RegisterModal = ({ isOpen, setIsOpen, loginHandler }) => {
     const [form, setForm] = useState(initialState);
     const [offer, setOffer] = useState(false);
     const [step, setStep] = useState(1);
@@ -140,7 +140,10 @@ const RegisterModal = ({ isOpen, setIsOpen }) => {
                     <div className='flex justify-between ml-6 w-[500px] items-center'>
                         <span className='text-white font-epilogue text-[14px]'>
                             Have an account? &nbsp;
-                            <span className='text-[#874ce8] text-[14px] hover:text-white transition-all duration-500 ease-in-out cursor-pointer'>
+                            <span 
+                                className='text-[#874ce8] text-[14px] hover:text-white transition-all duration-500 ease-in-out cursor-pointer'
+                                onClick={loginHandler}
+                            >
                                 Log in now
                             </span>
                         </span>
@@ -263,13 +266,13 @@ const RegisterModal = ({ isOpen, setIsOpen }) => {
                     </form>
     );
   return (
-            <motion.div className={`fixed inset-0 flex items-center justify-center bg-opacity-30 backdrop-blur-sm z-50 ${
+            <motion.div className={`fixed inset-0 flex items-center justify-center bg-[#222] bg-opacity-30 backdrop-blur-sm z-50 ${
             isOpen ? 'transition-opacity duration-300 opacity-100' : 'transition-opacity duration-300 opacity-0 pointer-events-none'
         }`}
         
         >
             <motion.div 
-                className='bg-[#121212] opacity-[0.9] w-[75%] h-[95%] flex justify-around items-center rounded-[10px]'
+                className='bg-[#121212] opacity-[0.9] w-[95%] h-[95%] flex justify-around items-center rounded-[10px]'
                 variants={dropIn}
                 initial="closed"
                 animate={controls}

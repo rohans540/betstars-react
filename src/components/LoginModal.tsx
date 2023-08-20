@@ -10,7 +10,7 @@ const dropIn = {
     closed: { y: "-100%" }
 }
 
-const LoginModal = ({ isOpen, setIsOpen }) => {
+const LoginModal = ({ isOpen, setIsOpen, openForgetPwd }) => {
     const controls = useAnimation();
 
     useEffect(() => {
@@ -22,11 +22,11 @@ const LoginModal = ({ isOpen, setIsOpen }) => {
       }, [isOpen, controls]);
 
   return (
-    <motion.div className={`fixed inset-0 flex items-center justify-center bg-opacity-30 backdrop-blur-sm z-50 ${
+    <motion.div className={`fixed inset-0 flex items-center justify-center bg-opacity-30 bg-[#222] backdrop-blur-sm z-50 ${
         isOpen ? 'transition-opacity duration-300 opacity-100' : 'transition-opacity duration-300 opacity-0 pointer-events-none'
     }`}>
         <motion.div
-            className='w-[600px] h-[600px] flex flex-col justify-start items-center bg-cover bg-center bg-no-repeat rounded-[10px]'
+            className='w-[550px] h-[700px] bg-[#121212] pb-[20px] flex flex-col justify-start items-center bg-cover bg-center bg-no-repeat rounded-[10px]'
             variants={dropIn}
             initial="closed"
             animate={controls}
@@ -53,7 +53,7 @@ const LoginModal = ({ isOpen, setIsOpen }) => {
                     />
                 </div>
             </div>
-            <form className='flex flex-col justify-around gap-4 items-center bg-[#121212]'>
+            <form className='flex flex-col justify-around w-full h-full gap-4 items-center bg-[#121212]'>
                 <h1 className='ml-6 font-epilogue font-bold text-[30px] text-[#dce1e3] mb-6'>Login</h1>
                 <CustomInput 
                     required
@@ -73,7 +73,7 @@ const LoginModal = ({ isOpen, setIsOpen }) => {
                     placeHolder="Password"
                     outline
                 />
-                <div className='flex justify-between items-center w-full'>
+                <div className='flex justify-between items-center w-[450px]'>
                 <div className='flex gap-2 items-center'>
                     <input 
                         className='py-[10px] sm:px-[25px] px-[10px] outline-none bg-[#222] hover:bg-[#555] font-epilogue text-white 
@@ -87,7 +87,10 @@ const LoginModal = ({ isOpen, setIsOpen }) => {
                     />
                     <span className='text-white text-[14px] font-epilogue'>Remember me</span>
                 </div>
-                <span className='text-[#874ce8] text-[16px] hover:text-white transition-all duration-500 ease-in-out cursor-pointer'>
+                <span 
+                    className='text-[#874ce8] text-[16px] hover:text-white transition-all duration-500 ease-in-out cursor-pointer'
+                    onClick={openForgetPwd}
+                    >
                                     Forgot password?
                                 </span>
                 </div>
@@ -96,11 +99,11 @@ const LoginModal = ({ isOpen, setIsOpen }) => {
                         btnType="button"
                         title="LOG IN"
                         handleClick={() => {}}
-                        styles="bg-[#874ce8] hover:text-[#874ce8] hover:bg-white transition-all duration-500 ease-in-out w-full font-epilogue"
+                        styles="bg-[#874ce8] hover:text-[#874ce8] hover:bg-white transition-all duration-500 ease-in-out w-[450px] font-epilogue"
                     />
                 </div>
             </form>
-            <div className='flex justify-around items-center w-full m-4'>
+            <div className='flex justify-around items-center'>
                 <span className='text-white font-epilogue text-[14px]'>
                         Don't have an account? &nbsp;
                         <span className='text-[#874ce8] text-[14px] hover:text-white transition-all duration-500 ease-in-out cursor-pointer'>

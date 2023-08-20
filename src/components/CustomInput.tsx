@@ -9,10 +9,11 @@ interface Props {
     placeHolder: string;
     isDropDown?: boolean;
     formData?: Array<any>;
-    outline: boolean;
+    outline?: boolean;
+    style?: object;
 }
 
-const CustomInput = ({ required = false, value, handleChange, inputType, name, placeHolder, isDropDown = false, formData = [], outline = false }: Props) => {
+const CustomInput = ({ required = false, value, handleChange, inputType, name, placeHolder, isDropDown = false, formData = [], outline = false, style = {} }: Props) => {
 
     if(isDropDown) {    
         return (
@@ -21,6 +22,7 @@ const CustomInput = ({ required = false, value, handleChange, inputType, name, p
                 required 
                 name={name} 
                 placeholder={placeHolder}
+                style={style}
             >
                 {formData.length > 0 && (
                     formData.map((data) => (
@@ -34,7 +36,7 @@ const CustomInput = ({ required = false, value, handleChange, inputType, name, p
         return (
             <label className='relative'>
                 <input type='text' placeholder={placeHolder} className='w-[450px] h-[53.5312px] rounded-lg bg-[#222] border-[1px] border-opacity-50 border-white py-[10px] sm:px-[25px] 
-                px-[10px] outline-none focus:border-[1px] focus:border-opacity-100 placeholder-gray-300 placeholder-opacity-0 transition duration-200' />
+                px-[10px] outline-none focus:border-[1px] focus:border-opacity-100 placeholder-gray-300 placeholder-opacity-0 transition duration-200' style={style} />
                 <span className='text-l text-white text-opacity-50 absolute left-7 top-4 transition duration-200 label-text'>{placeHolder}</span>
             </label>
         )
@@ -51,6 +53,7 @@ const CustomInput = ({ required = false, value, handleChange, inputType, name, p
                 step="0.1"
                 name={name}
                 placeholder={placeHolder}
+                style={style}
             />
           )
     }
