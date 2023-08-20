@@ -12,3 +12,7 @@
   scroll-behavior: smooth;
   color-scheme: dark;
 }
+
+input[type="text"]:focus ~ .label-text {
+  @apply border-white bg-[#222] transform -translate-y-6 -translate-x-2 scale-75
+}

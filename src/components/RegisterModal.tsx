@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input'
 
@@ -9,17 +9,8 @@ import CustomSwitch from './CustomSwitch';
 import CustomButton from './CustomButton';
 
 const dropIn = {
-    hidden: {
-        y: "-100vh",
-        opacity: "0"
-    },
-    visible: {
-        y: "0"
-    },
-    exit: {
-        y: "100vh",
-        opacity: "0"
-    }
+    open: { y: 0 },
+    closed: { y: "-100%" }
 }
 
 const initialState = {
@@ -60,11 +51,20 @@ const RegisterModal = ({ isOpen, setIsOpen }) => {
     const [form, setForm] = useState(initialState);
     const [offer, setOffer] = useState(false);
     const [step, setStep] = useState(1);
+    const controls = useAnimation();
 
     const handleChange = (event: any) => {
         const { name, value } = event?.target;
         setForm({ ...form, [name]: value });
     }
+
+    useEffect(() => {
+        if (isOpen) {
+          controls.start("open");
+        } else {
+          controls.start("closed");
+        }
+      }, [isOpen, controls]);
 
     const formStep1 = (
         <form className='w-full flex flex-col gap-[20px]'>
@@ -263,37 +263,40 @@ const RegisterModal = ({ isOpen, setIsOpen }) => {
                     </form>
     );
   return (
-    <div className={`fixed inset-0 flex items-center justify-center bg-opacity-30 backdrop-blur-sm z-50 ${
-        isOpen ? 'transition-opacity duration-300 opacity-100' : 'transition-opacity duration-300 opacity-0 pointer-events-none'
-      }`}
-      
-      >
-        <motion.div 
-            className='bg-[#121212] opacity-[0.9] w-[75%] h-[95%] flex justify-around items-center rounded-[10px]'
-            variants={dropIn}
+            <motion.div className={`fixed inset-0 flex items-center justify-center bg-opacity-30 backdrop-blur-sm z-50 ${
+            isOpen ? 'transition-opacity duration-300 opacity-100' : 'transition-opacity duration-300 opacity-0 pointer-events-none'
+        }`}
+        
         >
-            <div className='flex w-[40%] h-full'>
-                <img 
-                    src={registerImg}
-                    alt='register'
-                    className='w-full'
-                />
-            </div>
-            <div className='flex flex-col w-[600px] h-full justify-start items-start'>
-                <div className='flex justify-end w-[96%] mt-[50px]'>
-                    <img
-                        src={closeIcon}
-                        alt='close'
-                        className='w-[20px] h-[20px] cursor-pointer'
-                        onClick={() => setIsOpen(false)}
+            <motion.div 
+                className='bg-[#121212] opacity-[0.9] w-[75%] h-[95%] flex justify-around items-center rounded-[10px]'
+                variants={dropIn}
+                initial="closed"
+                animate={controls}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            >
+                <div className='flex w-[40%] h-full'>
+                    <img 
+                        src={registerImg}
+                        alt='register'
+                        className='w-full'
                     />
                 </div>
-                <h1 className='ml-6 font-epilogue font-bold text-[30px] text-[#dce1e3] mb-6'>Sign up</h1>
-                {step === 1 ? formStep1 : formStep2}
-                
-            </div>
+                <div className='flex flex-col w-[600px] h-full justify-start items-start'>
+                    <div className='flex justify-end w-[96%] mt-[50px]'>
+                        <img
+                            src={closeIcon}
+                            alt='close'
+                            className='w-[20px] h-[20px] cursor-pointer'
+                            onClick={() => setIsOpen(false)}
+                        />
+                    </div>
+                    <h1 className='ml-6 font-epilogue font-bold text-[30px] text-[#dce1e3] mb-6'>Sign up</h1>
+                    {step === 1 ? formStep1 : formStep2}
+                    
+                </div>
+            </motion.div>
         </motion.div>
-    </div>
   )
 }
 

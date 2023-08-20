@@ -11,7 +11,7 @@ const Icon = ({ styles, imgUrl, isActive, disabled, handleClick }) => (
     </div>
 )
 
-const Navbar = ({ setIsOpen }) => {
+const Navbar = ({ setIsRegOpen, setIsLoginOpen }) => {
     const [isActive, setIsActive] = useState(false);
     const [activeTab, setActiveTab] = useState("casino");
   return (
@@ -57,12 +57,15 @@ const Navbar = ({ setIsOpen }) => {
         <div className='flex gap-4 items-center'>
                 <button 
                     className='border-[2px] border-[#ad0f0a] md:h-[50px] h-[30px] md:w-[130px] w-[100px] box-border rounded-[9.6px] cursor-pointer'
-                    onClick={() => setIsOpen(open => !open)}
+                    onClick={() => setIsRegOpen(open => !open)}
                 >
                     <span className='font-epilogue text-white font-600'>Register</span>
                 </button>
 
-                <button className='bg-[#ad0f0a] md:h-[50px] h-[30px] md:w-[120px] w-[90px] box-border rounded-[9.6px] cursor-pointer'>
+                <button 
+                    className='bg-[#ad0f0a] md:h-[50px] h-[30px] md:w-[120px] w-[90px] box-border rounded-[9.6px] cursor-pointer'
+                    onClick={() => setIsLoginOpen(open => !open)}
+                >
                     <span className='font-epilogue text-white font-600'>Login</span>
                 </button>
 

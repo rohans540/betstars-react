@@ -1,13 +1,15 @@
 import { useState } from "react"
-import { Navbar, Sidebar, RegisterModal } from "./components"
+import { Navbar, Sidebar, RegisterModal, LoginModal } from "./components"
 
 const App = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   return (
     <div>
-      <Navbar setIsOpen={setIsOpen} />
+      <Navbar setIsRegOpen={setIsRegisterOpen} setIsLoginOpen={setIsLoginOpen}  />
       <Sidebar />
-      <RegisterModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <RegisterModal isOpen={isRegisterOpen} setIsOpen={setIsRegisterOpen} />
+      <LoginModal isOpen={isLoginOpen} setIsOpen={setIsLoginOpen}  />
     </div>
   )
 }
