@@ -103,7 +103,7 @@ const LoginModal = ({ isOpen, setIsOpen, openForgetPwd }) => {
                     />
                 </div>
             </form>
-            <div className='flex justify-around items-center'>
+            <div className='flex justify-around items-center mt-4'>
                 <span className='text-white font-epilogue text-[14px]'>
                         Don't have an account? &nbsp;
                         <span className='text-[#874ce8] text-[14px] hover:text-white transition-all duration-500 ease-in-out cursor-pointer'>

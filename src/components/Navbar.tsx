@@ -15,7 +15,7 @@ const Navbar = ({ setIsRegOpen, setIsLoginOpen }) => {
     const [isActive, setIsActive] = useState(false);
     const [activeTab, setActiveTab] = useState("");
   return (
-   <nav className='flex justify-between mb-[35px] w-full pr-[40px]'>
+   <nav className='flex justify-between w-full pr-[40px]'>
         <div
             className='w-[600px] h-[20px] m-6 flex justify-between items-center'
         >
